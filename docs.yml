@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  docs:
+    image: dogracing_pro_local_docs
+    container_name: dogracing_pro_local_docs
+    build:
+      context: .
+      dockerfile: ./compose/local/docs/Dockerfile
+    env_file:
+      - ./.envs/.local/.django
+    volumes:
+      - ./docs:/docs:z
+      - ./config:/app/config:z
+      - ./dogracing_pro:/app/dogracing_pro:z
+    ports:
+      - '9000:9000'
+    command: /start-docs

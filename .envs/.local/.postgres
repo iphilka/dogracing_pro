@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=dogracing_pro
+POSTGRES_USER=RtsXKKwkHxmhUNdGvCcPKxmztgciIXcv
+POSTGRES_PASSWORD=KCpTCvnOYqDohsWAfw4CgveuwU3jyCtkDyO6iiKWgHARJE1SMl95TTOS2K2zuto3
