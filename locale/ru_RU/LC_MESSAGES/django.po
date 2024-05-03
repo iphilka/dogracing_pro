@@ -303,7 +303,7 @@ msgstr ""
 
 #: dogracing_pro/templates/base.html:57
 msgid "My Profile"
-msgstr "Mon Profil"
+msgstr "Мой профиль"
 
 #: dogracing_pro/users/admin.py:17
 msgid "Personal info"

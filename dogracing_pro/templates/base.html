@@ -18,11 +18,13 @@
   <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}" />
   {% block css %}
     <!-- Latest compiled and minified Bootstrap CSS -->
+    {% comment %} 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css"
           integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA=="
           crossorigin="anonymous"
-          referrerpolicy="no-referrer" />
+          referrerpolicy="no-referrer" /> 
+    {% endcomment %}
 <!-- Your stuff: Third-party CSS libraries go here -->
 <!-- This file stores project-specific CSS -->
 
@@ -40,11 +42,13 @@
 
 
 <!-- Bootstrap JS -->
+{% comment %} 
 <script defer
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"
         integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g=="
         crossorigin="anonymous"
-        referrerpolicy="no-referrer"></script>
+        referrerpolicy="no-referrer"></script> 
+{% endcomment %}
 <!-- Your stuff: Third-party javascript libraries go here -->
 
 
@@ -60,7 +64,52 @@
 </head>
 <body class="{% block bodyclass %}{% endblock bodyclass %}">
   {% block body %}
-  <div class="mb-1">
+    <header class="header">
+      <div class="header__content">
+        <img src="{% static 'images/svgviewer-output.svg' %}" alt="Dogracing Logo" class="header__logo">
+        <nav class="nav">
+          <ul class="list-reset nav__list">
+            <li class="nav__item">
+              <a class="nav__link" href="{% url 'home' %}">Главная <span class="visually-hidden">(current)</span></a>
+            </li>
+            <li class="nav__item">
+              <a class="nav__link" href="#">Новости</a>
+            </li>
+            <li class="nav__item">
+              <a class="nav__link" href="#">Фото/Видео</a>
+            </li>
+            <li class="nav__item">
+              <a class="nav__link" href="{% url 'about' %}">О нас</a>
+            </li>
+            {% if request.user.is_authenticated %}
+              <li class="nav__item">
+                <a class="nav__link"
+                   href="{% url 'users:detail' request.user.username %}">{% translate "My Profile" %}</a>
+              </li>
+              <li class="nav__item">
+                {# URL provided by django-allauth/account/urls.py #}
+                <a class="nav__link" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>
+              </li>
+            {% else %}
+              {% if ACCOUNT_ALLOW_REGISTRATION %}
+                <li class="nav__item">
+                  {# URL provided by django-allauth/account/urls.py #}
+                  <a id="sign-up-link" class="nav__link" href="{% url 'account_signup' %}">{% translate "Sign Up" %}</a>
+                </li>
+              {% endif %}
+              <li class="nav__item">
+                {# URL provided by django-allauth/account/urls.py #}
+                <a id="log-in-link" class="nav__link" href="{% url 'account_login' %}">{% translate "Sign In" %}</a>
+              </li>
+            {% endif %}
+          </ul>
+        </nav>
+        <button class="btn-reset burger" aria-label="Открыть меню" aria-expanded="false">
+          <span class="burger__line"></span>
+        </button>
+      </div>
+    </header>
+  {% comment %} <div class="mb-1">
     <nav class="navbar navbar-expand-md navbar-light bg-light">
       <div class="container-fluid">
         <button class="navbar-toggler navbar-toggler-right"
@@ -107,7 +156,8 @@
       </div>
     </nav>
   </div>
-  <div class="container">
+   {% endcomment %}
+  
     {% if messages %}
       {% for message in messages %}
         <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
@@ -121,11 +171,12 @@
     {% endif %}
     {% block main %}
       {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
+        {% comment %} <p>Use this document as a way to quick start any new project.</p> {% endcomment %}
       {% endblock content %}
     {% endblock main %}
-
-  </div>
+    <footer>
+      Луговой Филипп
+    </footer>
   {% endblock body %}
   <!-- /container -->
   {% block modal %}
